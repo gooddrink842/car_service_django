@@ -8,7 +8,7 @@ from xhtml2pdf import pisa
 from django.core.mail import send_mail
 
 # static variable
-WEBSITE = "http://127.0.0.1:8000/"
+WEBSITE = "https://web-production-d8f5.up.railway.app/"
 
 @login_required
 def dashboard(request):
@@ -66,7 +66,7 @@ def service_detail(request, service_id):
     if (not status_complete_before_post) and (is_completed):
         print(send_mail(
             f"Pesanan Service Mobil Baru ke-{service_id}",
-            f"Haloo, Terdapat Pesanan Service Mobil yang telah diputuskan\n\nBerikut merupakan linknya: {WEBSITE}staff/generate_pdf/{service_id}/\n\nMohon untuk login terlebih dahulu",
+            f"Haloo, Terdapat Pesanan Service Mobil yang telah diputuskan\n\nBerikut merupakan linknya: {WEBSITE}staff/generate_pdf/{service_id}/\n\n",
             f"{settings.EMAIL_HOST_USER}",
             recipient_list=["Rickyprawiro@yahoo.com"],
             fail_silently=False,
@@ -75,7 +75,7 @@ def service_detail(request, service_id):
     no_wa_temp = car_service.techinician_phone.strip()
     if no_wa_temp.startswith("0"):
         no_wa_temp = "62" + no_wa_temp[1:]
-    whatsapp_link = f'https://api.whatsapp.com/send?phone={no_wa_temp}&text=Haloo%2C%20Terdapat%20Pesanan%20Service%20Mobil%20yang%20telah%20diputuskan%0A%0ABerikut%20merupakan%20linknya%3A%20{WEBSITE}staff/generate_pdf/{service_id}%2F%0A%0AMohon%20untuk%20login%20terlebih%20dulu'
+    whatsapp_link = f'https://api.whatsapp.com/send?phone={no_wa_temp}&text=Haloo%2C%20Terdapat%20Pesanan%20Service%20Mobil%20yang%20telah%20diputuskan%0A%0ABerikut%20merupakan%20linknya%3A%20{WEBSITE}staff/generate_pdf/{service_id}%2F%0A%0A'
     
     context = {'car_service': car_service, 'parts_to_service_list':parts_to_service, 'is_completed':is_completed, 'whatsapp_link':whatsapp_link}
     return render(request, 'service_detail.html', context)
