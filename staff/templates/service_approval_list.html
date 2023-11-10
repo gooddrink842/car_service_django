@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Service Approval List</h2>
+    <form method="post">
+        {% csrf_token %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID Car Service</th>
+                    <th>Pendaftar</th>
+                    <th>Plat Nomor</th>
+                    <th>Merek/Tipe</th>
+                    <th>Part yang Service</th>
+                    <th>Foto Part</th>
+                    <th>View Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car_service in car_services %}
+                <tr>
+                    <td>{{ car_service.id }}</td>
+                    <td>{{ car_service.user.username }}</td>
+                    <td>{{ car_service.license_plate }}</td>
+                    <td>{{ car_service.brand }}</td>
+                    <td>
+                        {% for part_to_service in car_service.part_to_service.all %}
+                            - {{ part_to_service.parts_to_service }}<br>
+                        {% empty %}
+                            No parts to service
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for part_to_service in car_service.part_to_service.all %}
+                            <img src="{{ part_to_service.car_photo.url }}" alt="{{ part_to_service.parts_to_service }} Photo" width="60"><br>
+                        {% empty %}
+                            No part photos
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{% url 'staff:service_detail' car_service.id %}" class="btn btn-info">View Detail</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</div>
+{% endblock content %}
