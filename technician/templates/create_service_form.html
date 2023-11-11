@@ -64,9 +64,12 @@
         numPartsInput.addEventListener('input', function () {
             const numParts = parseInt(numPartsInput.value);
     
-            if (!isNaN(numParts)) {
-                addInputFields(numParts);
+            if (isNaN(numParts) || numParts < 1) {
+                numParts = 1;
+                numPartsInput.value = numParts;
             }
+
+            addInputFields(numParts);
         });
     
         addInputFields(parseInt(numPartsInput.value));
