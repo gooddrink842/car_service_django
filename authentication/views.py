@@ -20,9 +20,9 @@ def login(request):
         if user is not None:
             auth_login(request, user)
             if user.is_technician:
-                return redirect('/technician/dashboard')
+                return redirect('technician:dashboard_technician')
             else:
-                return redirect('/staff/dashboard')
+                return redirect('staff:dashboard_staff')
         else:
             return render(request, 'login.html', {'error_message': 'Invalid credentials'})
 
@@ -43,7 +43,7 @@ def register_technician(request):
         user.save()
         messages.success(request, 'Registration successful!')
         context = {'username': username}
-        return redirect('/login')
+        return redirect('authentication:login')
     return render(request, 'register_technician.html')
 
 def register_staff(request):
@@ -55,5 +55,5 @@ def register_staff(request):
         user.save()
         messages.success(request, 'Registration successful!')
         context = {'username': username}
-        return redirect('/login')
+        return redirect('authentication:login')
     return render(request, 'register_staff.html')

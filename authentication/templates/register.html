@@ -9,8 +9,8 @@
 <div class="content-container d-flex align-items-center justify-content-center mx-auto">
 	<div class="container col-md-12">
 		<h2><strong>Register</strong></h2>
-		<a href="/register_technician" class="btn btn-primary btn-custom btn-block">Tukang Service</a>
-        <a href="/register_staff" class="btn btn-primary btn-custom btn-block">Staff</a>
+		<a href="{% url 'authentication:register_technician' %}" class="btn btn-primary btn-custom btn-block">Tukang Service</a>
+        <a href="{% url 'authentication:register_staff' %}" class="btn btn-primary btn-custom btn-block">Staff</a>
 	</div>
 </div>
 {% endblock content %}

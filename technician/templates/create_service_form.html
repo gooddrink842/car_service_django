@@ -16,7 +16,7 @@
         </div>
         {% endif %}
         
-        <a href="/technician/dashboard/" class="btn btn-primary mb-3">Back to Dashboard</a>
+        <a href="{% url 'technician:dashboard_technician' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
         
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}

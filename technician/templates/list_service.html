@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h2>List of Car Services</h2>
-    <a href="/technician/dashboard/" class="btn btn-primary mb-3">Back to Dashboard</a>
+    <a href="{% url 'technician:dashboard_technician' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
     <table class="table">
         <thead>
             <tr>

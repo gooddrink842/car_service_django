@@ -27,7 +27,7 @@ def service_approval_list(request):
         context = {'car_services': car_services}
         return render(request, 'service_approval_list.html', context)
     else:
-        return redirect('/staff/dashboard')
+        return redirect('staff:dashboard_staff')
 
 ############ UTIL ############
 def check_is_completed(parts_to_service):
