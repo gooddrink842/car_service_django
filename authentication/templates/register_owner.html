@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-    <title>Register Staff - CAR SERVICE</title>
+    <title>Register Car Owner - CAR SERVICE</title>
 {% endblock meta %}
 
 {% block content %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <div class="content-container d-flex align-items-center justify-content-center mx-auto">
         <div class="container">
-            <h2>Register Staff - <strong>CAR SERVICE</strong></h2>
+            <h2>Register Car Owner - <strong>CAR SERVICE</strong></h2>
             {% if status == 'failed' %}
                 <div class="alert alert-danger">
                     {{ message }}

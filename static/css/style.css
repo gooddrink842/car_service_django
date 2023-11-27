@@ -4,13 +4,13 @@ html, body {
 }
 
 body {
-    background-image: linear-gradient(to right, #10b4b1, #c6e8df);
+    background-image: linear-gradient(to bottom right, #293178, #c6e8df);
     font-family: 'Source Sans Pro', sans-serif;
     min-height: 100vh;
 }
 
 .navbar-custom {
-    background-color: #002B5B;
+    background-color: #202124;
     box-shadow: 0 4px 8px rgba(7, 7, 7, 0.2);
 }
 

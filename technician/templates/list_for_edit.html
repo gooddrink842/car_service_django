@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-2">Pilih untuk mengedit</h2>
+    <a href="{% url 'technician:dashboard_technician' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+    <table class="table" id="serviceTable">
+        <thead>
+            <tr>
+                <th>ID Car Service</th>
+                <th>Nama Teknisi</th>
+                <th>Plat Nomor</th>
+                <th>Merek/Tipe</th>
+                <th>Part yang Service</th>
+                <th>Foto Part</th>
+                <th>Tanggal Servis</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car_service in car_services %}
+            <tr id="data_table">
+                <td>{{ car_service.id }}</td>
+                <td>{{ car_service.techinician_name }}</td>
+                <td>{{ car_service.license_plate }}</td>
+                <td>{{ car_service.brand }}</td>
+                <td>
+                    {% for part_to_service in car_service.part_to_service.all %}
+                        - {{ part_to_service.parts_to_service }}<br>
+                    {% empty %}
+                        No parts to service
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for part_to_service in car_service.part_to_service.all %}
+                        <img src="{{ part_to_service.car_photo.url }}" alt="{{ part_to_service.parts_to_service }} Photo" width="60"><br>
+                    {% empty %}
+                        No part photos
+                    {% endfor %}
+                </td>
+                <td>{{ car_service.service_date }}</td>
+                <td>
+                    <a href="{% url 'technician:edit_service' car_service.id %}" class="btn btn-info">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

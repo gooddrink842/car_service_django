@@ -9,6 +9,11 @@
 <div class="content-container d-flex align-items-center justify-content-center mx-auto">
     <div class="container">
         <h2>Login - <strong>CAR SERVICE</strong></h2>
+        {% if status == 'failed' %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endif %}
         <form method="post">
             {% csrf_token %}
             <div class="form-group">

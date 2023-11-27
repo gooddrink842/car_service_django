@@ -34,7 +34,7 @@
         <tr>
             <th>Daftar Part Servis</th>
             <td>
-                {% for part_to_service in parts_to_service_list %}
+                {% for part_to_service, videoname in parts_to_service_list %}
                     <p>
                         <strong>Nama Servis Part {{ forloop.counter }}:</strong><br>
                         {{ part_to_service.parts_to_service }}
@@ -43,18 +43,24 @@
                         <strong>Foto Servis Part {{ forloop.counter }}:</strong><br>
                         <img src="{{ part_to_service.car_photo.url }}" alt="{{ part_to_service.parts_to_service }} Photo" width="200"><br>
                         <a href="{{ part_to_service.car_photo.url }}" target="_blank" class="btn btn-info">View Photo</a>
+                        {% if part_to_service.car_video %}
+                            <a href="{% url 'play_video' videoname %}" target="_blank" class="btn btn-info">View Video</a>
+                        {% endif %}
                     </p>
                     <form method="post">
                         {% csrf_token %}
                         <input type="hidden" name="car_service_id" value="{{ car_service.id }}">
                         <input type="hidden" name="part_to_service_id" value="{{ part_to_service.id }}">
                         {% if part_to_service.is_approved %}
-                            Disetujui &#9989;
+                            &#9989 Disetujui oleh {{ part_to_service.validated_by }}<br>
+                            <strong>Alasan:</strong> {{ part_to_service.reason }}
                         {% elif part_to_service.is_rejected %}
-                            Ditolak &#10060;
+                            &#10060 Ditolak oleh {{ part_to_service.validated_by }};<br>
+                            <strong>Alasan:</strong> {{ part_to_service.reason }}
                         {% else %}
-                            <button type="submit" name="action" value="approve" class="btn btn-success">Accept</button>
-                            <button type="submit" name="action" value="reject" class="btn btn-danger">Reject</button>
+                            <button type="submit" name="action" value="approve" class="btn btn-success mb-3">Accept</button>
+                            <button type="submit" name="action" value="reject" class="btn btn-danger mb-3">Reject</button><br>
+                            <textarea name="reason" placeholder="Alasan" class="form-control col-12 col-md-6" required></textarea>
                         {% endif %}
                     </form>
                     <br>

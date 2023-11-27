@@ -26,7 +26,9 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('technician/', include('technician.urls')),
     path('staff/', include('staff.urls')),
+    path('owner/', include('owner.urls')),
     path('logout/', logout_view, name='logout'),
+    path('play_video/<str:filename>/', play_video, name='play_video'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

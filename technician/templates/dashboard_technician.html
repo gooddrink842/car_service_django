@@ -32,9 +32,15 @@
 						<input type="text" aria-labelledby="negara" class="form-control" placeholder="" value="Technician" id="negara-edit" disabled="true">
 					</div>
 				</div>
-				<div class="row mt-2">
-					<div class="col-md-12">
+				<div class="btn-toolbar mt-3 mx-3" role="toolbar" aria-label="Toolbar with button groups">
+					<div class="btn-group me-2" role="group" aria-label="First group">
 						<a href="{% url 'technician:create_service_form' %}" class="btn btn-primary">Buat Form Service</a>
+					</div>
+					<div class="btn-group me-2" role="group" aria-label="Second group">
+						<a href="{% url 'technician:list_for_edit' %}" class="btn btn-primary btn-block">Edit Form</a>
+					</div>
+					<div class="btn-group me-2" role="group" aria-label="Second group">
+						<a href="{% url 'technician:history_service' %}" class="btn btn-primary btn-block">Riwayat Form</a>
 					</div>
 				</div>
 			</div>

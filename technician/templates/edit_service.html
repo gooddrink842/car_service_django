@@ -2,21 +2,21 @@
 {% load static %}
 
 {% block meta %}
-<title>Buat Service Form - CAR SERVICE</title>
+<title>Edit Service Form - CAR SERVICE</title>
 {% endblock meta %}
 
 {% block content %}
 <div class="content-container d-flex align-items-center justify-content-center mx-auto">
     <div class="container">
-        <h2>Buat Service Form</h2>
+        <h2>Edit Service Form</h2>
         
         {% if status == 'success' %}
             <div class="alert alert-success">
-                Your service form has been successfully submitted.
+                Your service form has been successfully edited.
             </div>
         {% endif %}
         
-        <a href="{% url 'technician:dashboard_technician' %}" class="btn btn-primary mb-3">Back to Dashboard</a>
+        <a href="{% url 'technician:list_for_edit' %}" class="btn btn-danger mb-3">Cancel</a>
         
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
@@ -41,19 +41,38 @@
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
         const todayString = `${year}-${month}-${day}`;
-        tanggalInput.value = todayString;
-    
+        // tanggalInput.value = todayString;
+        
+        const arrAwal = {{ text_name|safe }};
+        console.log(arrAwal);
+
         function addInputFields(numParts) {
             partsContainer.innerHTML = '';
     
             for (let i = 0; i < numParts; i++) {
-                partsContainer.innerHTML += `
+                if (i < arrAwal.length) {
+                    partsContainer.innerHTML += `
                     <div class="form-group">
                         <label for="part_to_service_${i}">Part ke-${i + 1}</label>
-                        <input type="text" class="form-control" id="part_to_service_${i}" name="part_to_service_${i}" placeholder="Enter Part to Service" required>
+                        <input type="text" value="${arrAwal[i]}" class="form-control" id="part_to_service_${i}" name="part_to_service_${i}" placeholder="Enter Part to Service">
                     </div>
                     <div class="form-group">
-                        <label for="car_photo_${i}">Foto Part ke-${i + 1}</label>
+                        <label for="car_photo_${i}">Ganti Foto Part ke-${i + 1}</label>
+                        <input type="file" class="form-control-file" id="car_photo_${i}" name="car_photo_${i}" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="car_video_${i}">[Tidak Wajib] Video Part ke-${i + 1}</label>
+                        <input type="file" class="form-control-file" id="car_video_${i}" name="car_video_${i}" accept="video/*">
+                    </div>
+                `;
+                } else {
+                    partsContainer.innerHTML += `
+                    <div class="form-group">
+                        <label for="part_to_service_${i}">Part ke-${i + 1}</label>
+                        <input type="text" class="form-control" id="part_to_service_${i}" name="part_to_service_${i}" placeholder="Enter Part to Service">
+                    </div>
+                    <div class="form-group">
+                        <label for="car_photo_${i}">Tambahkan Foto Part ke-${i + 1}</label>
                         <input type="file" class="form-control-file" id="car_photo_${i}" name="car_photo_${i}" required accept="image/*">
                     </div>
                     <div class="form-group">
@@ -61,10 +80,13 @@
                         <input type="file" class="form-control-file" id="car_video_${i}" name="car_video_${i}" accept="video/*">
                     </div>
                 `;
+                }
+            
+
             }
         }
     
-        numPartsInput.addEventListener('input', function () {
+        numPartsInput.addEventListener('change', function () {
             const numParts = parseInt(numPartsInput.value);
     
             if (isNaN(numParts) || numParts < 1) {
@@ -80,10 +102,6 @@
 
     });
 
-    function handleResize() {
-        chooseColumnOrRow();
-    }
-
     function chooseColumnOrRow() {
         const flexContainer = document.getElementById('flex-container');
         if (window.innerWidth >= window.innerHeight) {
@@ -91,61 +109,63 @@
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="staff_service_name">Nama Tukang Servis</label>
-                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" required value="{{ user_full_name }}">
+                        <input type="text" value="{{ car_service.techinician_name }}" class="form-control" id="staff_service_name" name="staff_service_name" required>
                     </div>
                     <div class="form-group">
                         <label for="license_plate">Plat Nomor</label>
-                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
+                        <input type="text" value="{{ car_service.license_plate }}" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
                     </div>
                     <div class="form-group">
                         <label for="brand">Merek/Tipe</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
+                        <input type="text" value="{{ car_service.brand }}" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
                     </div>
                     <div class="form-group">
                         <label for="phone_number">No Telepon Tukang Servis</label>
-                        <input type="number" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
+                        <input type="number" value="{{ car_service.techinician_phone }}" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal Service</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                        <input type="date" value="{{ converted_date }}" class="form-control" id="tanggal" name="tanggal" required>
                     </div>
                 </div>
                 <!-- Kolom Kanan -->
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="num_parts">Jumlah of Part yang di Servis</label>
-                        <input type="number" class="form-control" id="num_parts" name="num_parts" required value="1">
+                        <input type="number" value="{{ len_parts_to_service }}" class="form-control" id="num_parts" name="num_parts" required value="1">
                     </div>
-                    <div id="parts-container"></div>
+                    <div id="parts-container">
+                    </div>
                 </div>`
         } else {
             flexContainer.innerHTML += `<!-- Kolom Kiri -->
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="staff_service_name">Nama Tukang Servis</label>
-                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" required value="{{ user_full_name }}">
+                        <input type="text" value="{{ car_service.techinician_name }}" class="form-control" id="staff_service_name" name="staff_service_name" required>
                     </div>
                     <div class="form-group">
                         <label for="license_plate">Plat Nomor</label>
-                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
+                        <input type="text" value="{{ car_service.license_plate }}" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
                     </div>
                     <div class="form-group">
                         <label for="brand">Merek/Tipe</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
+                        <input type="text" value="{{ car_service.brand }}" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
                     </div>
                     <div class="form-group">
                         <label for="phone_number">No Telepon Tukang Servis</label>
-                        <input type="number" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
+                        <input type="number" value="{{ car_service.techinician_phone }}" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal Service</label>
-                        <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                        <input type="date" value="{{ converted_date }}" class="form-control" id="tanggal" name="tanggal" required>
                     </div>
                     <div class="form-group">
                         <label for="num_parts">Jumlah of Part yang di Servis</label>
-                        <input type="number" class="form-control" id="num_parts" name="num_parts" required value="1">
+                        <input type="number" value="{{ len_parts_to_service }}" class="form-control" id="num_parts" name="num_parts" required value="1">
                     </div>
-                    <div id="parts-container"></div>
+                    <div id="parts-container">
+                    </div>
                 </div>`
         }
     }

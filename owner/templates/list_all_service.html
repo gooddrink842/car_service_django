@@ -31,6 +31,7 @@
                         <option value="license_plate">Plat Nomor</option>
                         <option value="brand">Brand Mobil</option>
                         <option value="service_date_formatted">Service Date</option>
+                        <option value="status_now">Status</option>
                     </select>
                 </div>
             </div>
@@ -130,19 +131,19 @@
                 <td>${car_service.service_date}</td>
                 <td>${car_service.status_now}</td>
                 <td>
-                    <a href="${car_service.service_detail_url}" class="btn btn-info">Detail</a>
-                    <form method="post" onsubmit="return confirmDelete()">
-                        {% csrf_token %}
-                        <button type="submit" name="delete" value="${car_service.id}" class="btn btn-danger">Delete</button>
-                    </form>
+                    ${car_service.status_now === 'Deleted' ? `
+                        <form method="post" onsubmit="return confirmRestore()">
+                            {% csrf_token %}
+                            <button type="submit" name="restore" value="${car_service.id}" class="btn btn-success">Restore</button>
+                        </form>` : ''}
                 </td>
             `;
             tableBody.appendChild(row);
         });
     }
 
-    function confirmDelete() {
-        return confirm("Are you sure you want to delete this entry?");
+    function confirmRestore() {
+        return confirm("Are you sure you want to restore this entry?");
     }
 
     function filterTable() {
