@@ -46,14 +46,18 @@
         <tr>
             <th>Daftar Part Servis</th>
             <td>
-                {% for part_to_service in parts_to_service_list %}
+                {% for part_to_service, videoname in parts_to_service_list %}
                     <p>
                         <strong>Nama Servis Part {{ forloop.counter }}:</strong><br>
                         {{ part_to_service.parts_to_service }}
                     </p>
                     <p>
                         <strong>Foto Servis Part {{ forloop.counter }}:</strong><br>
-                        <img src="{{ part_to_service.car_photo.path }}" alt="{{ part_to_service.parts_to_service }} Photo" width="200"><br>
+                        <img src="{{ part_to_service.car_photo.path }}" alt="{{ part_to_service.parts_to_service }} Photo" width="200">
+                        {% if part_to_service.car_video %}
+                            <br><strong>Video Servis Part {{ forloop.counter }}:</strong><br>
+                            <a href="{% url 'play_video' videoname %}">{{full_weburl}}{% url 'play_video' videoname %}</a>
+                        {% endif %}
                     </p>
                     <form method="post">
                         {% if part_to_service.is_approved %}

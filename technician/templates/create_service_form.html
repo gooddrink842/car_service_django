@@ -50,7 +50,7 @@
                 partsContainer.innerHTML += `
                     <div class="form-group">
                         <label for="part_to_service_${i}">Part ke-${i + 1}</label>
-                        <input type="text" class="form-control" id="part_to_service_${i}" name="part_to_service_${i}" placeholder="Enter Part to Service" required>
+                        <input type="text" class="form-control" id="part_to_service_${i}" name="part_to_service_${i}" placeholder="Masukan Nama Part" required>
                     </div>
                     <div class="form-group">
                         <label for="car_photo_${i}">Foto Part ke-${i + 1}</label>
@@ -91,19 +91,19 @@
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="staff_service_name">Nama Tukang Servis</label>
-                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" required value="{{ user_full_name }}">
+                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" placeholder="Masukan Nama Tukang Servis" required value="{{ user_full_name }}">
                     </div>
                     <div class="form-group">
                         <label for="license_plate">Plat Nomor</label>
-                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
+                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Masukan Plat Nomor" required>
                     </div>
                     <div class="form-group">
                         <label for="brand">Merek/Tipe</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
+                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Masukan Merek Mobil" required>
                     </div>
                     <div class="form-group">
                         <label for="phone_number">No Telepon Tukang Servis</label>
-                        <input type="number" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
+                        <input type="number" class="form-control" id="phone_number" name="phone_number" placeholder="Masukan No Telp Tukang" required value="{{ user_phone_number }}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal Service</label>
@@ -114,7 +114,7 @@
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="num_parts">Jumlah of Part yang di Servis</label>
-                        <input type="number" class="form-control" id="num_parts" name="num_parts" required value="1">
+                        <input type="number" class="form-control" id="num_parts" name="num_parts" placeholder="Masukan Jumlah Part" required value="1">
                     </div>
                     <div id="parts-container"></div>
                 </div>`
@@ -123,19 +123,19 @@
                 <div style="flex: 1; padding: 0 10px;">
                     <div class="form-group">
                         <label for="staff_service_name">Nama Tukang Servis</label>
-                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" required value="{{ user_full_name }}">
+                        <input type="text" class="form-control" id="staff_service_name" name="staff_service_name" placeholder="Masukan Nama Tukang Servis" required value="{{ user_full_name }}">
                     </div>
                     <div class="form-group">
                         <label for="license_plate">Plat Nomor</label>
-                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Enter License Plate" required>
+                        <input type="text" class="form-control" id="license_plate" name="license_plate" placeholder="Masukan Plat Nomor" required>
                     </div>
                     <div class="form-group">
                         <label for="brand">Merek/Tipe</label>
-                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Enter Car Brand" required>
+                        <input type="text" class="form-control" id="brand" name="brand" placeholder="Masukan Merek Mobil" required>
                     </div>
                     <div class="form-group">
                         <label for="phone_number">No Telepon Tukang Servis</label>
-                        <input type="number" class="form-control" id="phone_number" name="phone_number" required value="{{ user_phone_number }}">
+                        <input type="number" class="form-control" id="phone_number" name="phone_number" placeholder="Masukan No Telp Tukang" required value="{{ user_phone_number }}">
                     </div>
                     <div class="form-group">
                         <label for="tanggal">Tanggal Service</label>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="form-group">
                         <label for="num_parts">Jumlah of Part yang di Servis</label>
-                        <input type="number" class="form-control" id="num_parts" name="num_parts" required value="1">
+                        <input type="number" class="form-control" id="num_parts" name="num_parts" placeholder="Masukan Jumlah Part" required value="1">
                     </div>
                     <div id="parts-container"></div>
                 </div>`

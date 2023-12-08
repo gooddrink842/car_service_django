@@ -100,9 +100,15 @@ def service_detail(request, service_id):
 def generate_pdf(request, car_service_id):
     car_service = get_object_or_404(CarService, id=car_service_id)
     parts_to_service = car_service.part_to_service.all()
+    appended_parts = []
+    for part_to_service in parts_to_service:
+        try:
+            appended_parts.append((part_to_service, str(part_to_service.car_video.url).split("/")[-1]))
+        except:
+            appended_parts.append((part_to_service, None))
 
     template_path = 'html2pdf.html'
-    context = {'car_service': car_service, 'parts_to_service_list':parts_to_service}
+    context = {'car_service': car_service, 'parts_to_service_list':appended_parts, 'full_weburl':str(WEBURL).rstrip("/")}
 
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'filename="car_service_{car_service.id}.pdf'

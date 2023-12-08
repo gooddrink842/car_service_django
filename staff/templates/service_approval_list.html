@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container">
-    <h2>Service Approval List</h2>
+    <h2 class="mt-3 text-white">Service Approval List</h2>
     <div class="card mb-2 bg-light">
         <div class="row justify-content-center">
             <div class="col-md-3">
@@ -53,23 +53,25 @@
         </div>
     </div>
 
-    <table class="table" id="serviceTable">
-        <thead>
-            <tr>
-                <th>ID Car Service</th>
-                <th>Nama Teknisi</th>
-                <th>Plat Nomor</th>
-                <th>Merek/Tipe</th>
-                <th>Part yang Service</th>
-                <th>Foto Part</th>
-                <th>Tanggal Servis</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody">
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table" id="serviceTable">
+            <thead>
+                <tr>
+                    <th>ID Car Service</th>
+                    <th>Nama Teknisi</th>
+                    <th>Plat Nomor</th>
+                    <th>Merek/Tipe</th>
+                    <th>Part yang Service</th>
+                    <th>Foto Part</th>
+                    <th>Tanggal Servis</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
