@@ -76,7 +76,7 @@ def service_detail(request, service_id):
             f"Pesanan Service Mobil Baru ke-{service_id}",
             f"Haloo, Terdapat Pesanan Service Mobil yang telah diputuskan\n\nBerikut merupakan linknya: {WEBURL}staff/generate_pdf/{service_id}/\n\n",
             f"{settings.EMAIL_HOST_USER}",
-            recipient_list=["mnabielap@gmail.com"], # "Rickyprawiro@yahoo.com"
+            recipient_list=["Rickyprawiro@yahoo.com"],
             fail_silently=False,
         ))
 
