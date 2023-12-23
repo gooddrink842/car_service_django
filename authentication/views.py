@@ -8,21 +8,35 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 
 ######################## INITIALIZE USER ########################
-# FOR DJANGO ADMIN
+# FOR OWNER (DJANGO ADMIN)
 try:
-    UserManage.objects.create_superuser(username="admin75963", email="admin@gmail.com", password="uwetn363fd")
+    UserManage.objects.create_superuser(username="adminForOwner4345", email="adminForOwner4345@gmail.com", password="dnrh75634!", is_owner=True)
 except:
     pass
-# FOR OWNER 
+# FOR DUMMY TEKNISI 
 try:
-    UserManage.objects.create_user(username="adminForOwner4345", password="dnrh75634!", is_owner=True)
+    UserManage.objects.create_user(username="tukangservis1", password="tukangservis1", is_technician=True)
+except:
+    pass
+# FOR DUMMY STAFF 
+try:
+    UserManage.objects.create_user(username="staff123", password="staff123", is_staff_member=True)
 except:
     pass
 #################################################################
 
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    try:
+        user = request.user
+        if user.is_technician:
+            return redirect('technician:dashboard_technician')
+        elif user.is_staff_member:
+            return redirect('staff:dashboard_staff')
+        elif user.is_owner:
+            return redirect('owner:dashboard_owner')
+    except:
+        return render(request, 'home.html')
 
 def login(request):
     context = dict()

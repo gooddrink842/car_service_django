@@ -84,6 +84,9 @@
         var columnSelect = document.getElementById("columnSelect");
         var orderSelect = document.getElementById("orderSelect");
 
+        columnSelect.value = "service_date_formatted";
+        orderSelect.value = "desc";
+
         columnSelect.addEventListener("change", filterTable);
         orderSelect.addEventListener("change", filterTable);
 

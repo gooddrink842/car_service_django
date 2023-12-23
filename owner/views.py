@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
+from authentication.models import UserManage
 from technician.models import CarService
-from utility.util import check_is_completed
+from utility.util import check_is_completed, generateRandomString
 from django.conf import settings
 from technician.models import CarService, PartToService
 from django.core.mail import send_mail
@@ -94,3 +95,32 @@ def service_detail(request, service_id):
     
     context = {'car_service': car_service, 'parts_to_service_list':appended_parts, 'is_completed':is_completed, 'whatsapp_link':whatsapp_link}
     return render(request, 'service_detail_owner.html', context)
+
+def add_user(request):
+    context = dict()
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        role = request.POST.get('role')
+
+        try:
+            if role == 'technician':
+                user = UserManage.objects.create_user(username=username, password=password)
+                user.is_technician = True
+            elif role == 'staff_member':
+                user = UserManage.objects.create_user(username=username, password=password)
+                user.is_staff_member = True
+            elif role == 'owner':
+                user = UserManage.objects.create_superuser(username=username, email=f"{generateRandomString()}@gmail.com", password=password)
+                user.is_owner = True
+
+            user.save()
+
+            context['message_flag'] = 'success'
+            context['message'] = f'Sukses menyimpan user "{username}" sebagai {role}'
+        except Exception as e:
+            context['message_flag'] = 'danger'
+            context['message'] = str(e)
+
+    return render(request, 'add_user.html', context)

@@ -61,10 +61,10 @@
                     </p>
                     <form method="post">
                         {% if part_to_service.is_approved %}
-                            ✓ Disetujui oleh {{ part_to_service.validated_by }}<br>
+                            <span style="color: green;">&#10003;</span> Disetujui<br>
                             <strong>Alasan:</strong> {{ part_to_service.reason }}
                         {% elif part_to_service.is_rejected %}
-                            X Ditolak 
+                            <span style="color: red;">X</span> Ditolak 
                             <strong>Alasan:</strong> {{ part_to_service.reason }}
                         {% endif %}
                     </form>

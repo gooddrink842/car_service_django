@@ -32,8 +32,14 @@
                     </div>
 				</div>
 				<div class="btn-toolbar mt-3 mx-3" role="toolbar" aria-label="Toolbar with button groups">
-					<div class="btn-group me-2" role="group" aria-label="Second group">
+					<div class="btn-group me-2" role="group" aria-label="First group">
 						<a href="{% url 'owner:list_all_service' %}" class="btn btn-primary btn-block">List All Service</a>
+					</div>
+					<div class="btn-group me-2" role="group" aria-label="Second group">
+						<a href="/admin" class="btn btn-primary btn-block">Admin Django</a>
+					</div>
+					<div class="btn-group me-2" role="group" aria-label="Third group">
+						<a href="{% url 'owner:add_user' %}" class="btn btn-primary btn-block">Add User</a>
 					</div>
 				</div>
 			</div>
